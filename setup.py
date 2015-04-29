@@ -6,7 +6,7 @@ __version__ = "0.0.1"
 setup(
     version=__version__,
     name="Ferment",
-    description="A little process to listen to docker container events and create ferm configs",
+    description="A tool to provide the current docker config in ferm format",
     author="Oliver Berger",
     author_email="diefans@gmail.com",
     classifiers=[
