@@ -15,9 +15,20 @@ Usage
 
 Install Ferment via `pip`::
 
-    pip install ferment
+    # pip install ferment
 
 
+    # ferment docker --help
+    Usage: ferment docker [OPTIONS] COMMAND [ARGS]...
+
+    Options:
+      -d, --docker PATH     The docker api socket.
+      -c, --cidr TEXT       Docker CIDR.
+      -i, --interface TEXT  Docker interface.
+      --help                Show this message and exit.
+
+    Commands:
+      config
 
 You just include a callback to ferment within your `ferm.conf`::
 
