@@ -74,7 +74,7 @@ You just include a callback to ferment within your `ferm.conf`::
         }
     }
 
-    @include '/usr/local/bin/ferment docker config|'
+    @include '/usr/local/bin/ferment docker config|';
 
 
 Todo
