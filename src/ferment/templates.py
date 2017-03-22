@@ -44,7 +44,10 @@ domain ip {
     @for container in containers:
     # @container['Id']
     @(
-        ip_address = container['NetworkSettings']['IPAddress']
+        networks = container['NetworkSettings']['Networks'].keys()
+        first_network = list(networks)[0]
+        # TODO: Loop over each network instad just using the first network!
+        ip_address = container['NetworkSettings']['Networks'][first_network]['IPAddress']
         port_bindings = container['HostConfig']['PortBindings']
 
         # group into proto:port:(host:port)
