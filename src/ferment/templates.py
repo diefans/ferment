@@ -22,7 +22,10 @@ domain ip {
     }
     table filter {
         chain DOCKER;
+        chain DOCKER-ISOLATION;
         chain FORWARD {
+            jump DOCKER-ISOLATION;
+
             outerface @interface {
                 jump DOCKER;
                 mod conntrack ctstate (RELATED ESTABLISHED) ACCEPT;
@@ -31,6 +34,9 @@ domain ip {
                 outerface ! @interface ACCEPT;
                 outerface @interface ACCEPT;
             }
+        }
+        chain DOCKER-ISOLATION {
+            jump RETURN;
         }
     }
 
