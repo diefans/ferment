@@ -52,17 +52,18 @@ domain ip {
 
         # group into proto:port:(host:port)
         bindings = {}
-        for port_proto, binds in port_bindings.iteritems():
-            port, proto = port_proto.split("/")
+        if port_bindings != None:
+            for port_proto, binds in port_bindings.iteritems():
+                port, proto = port_proto.split("/")
 
-            if proto not in bindings:
-                bindings[proto] = {}
+                if proto not in bindings:
+                    bindings[proto] = {}
 
-            if port not in bindings[proto]:
-                bindings[proto][port] = []
+                if port not in bindings[proto]:
+                    bindings[proto][port] = []
 
-            for bind in binds:
-                bindings[proto][port].append((bind['HostIp'], bind['HostPort']))
+                for bind in binds:
+                    bindings[proto][port].append((bind['HostIp'], bind['HostPort']))
 
     )
     table nat {
