@@ -53,7 +53,7 @@ class FermConfig(object):
 @click.group()
 @click.option(
     "--log-level",
-    type=click.Choice([k for k, v in sorted(LOG_LEVELS.iteritems(), key=lambda x: x[1])]),
+    type=click.Choice([k for k, v in sorted(LOG_LEVELS.items(), key=lambda x: x[1])]),
     default="info",
     help="Logging level.")
 @click.pass_context
