@@ -53,7 +53,7 @@ domain ip {
         # group into proto:port:(host:port)
         bindings = {}
         if port_bindings != None:
-            for port_proto, binds in port_bindings.iteritems():
+            for port_proto, binds in port_bindings.items():
                 port, proto = port_proto.split("/")
 
                 if proto not in bindings:
@@ -69,8 +69,8 @@ domain ip {
     table nat {
         chain POSTROUTING {
             # container setup
-            @for proto, ports in bindings.iteritems():
-            @for port, binds in ports.iteritems():
+            @for proto, ports in bindings.items():
+            @for port, binds in ports.items():
             saddr @ip_address/32 daddr @ip_address/32 protocol @proto {
                 dport @port MASQUERADE;
             }
@@ -78,8 +78,8 @@ domain ip {
             @end
         }
         chain DOCKER {
-            @for proto, ports in bindings.iteritems():
-            @for port, binds in ports.iteritems():
+            @for proto, ports in bindings.items():
+            @for port, binds in ports.items():
             @for host_ip, host_port in binds:
             @{ host_ip and "daddr %s/32 " % host_ip or '' }interface ! @interface protocol tcp dport @host_port DNAT to @ip_address:@port;
             @end
@@ -89,9 +89,9 @@ domain ip {
     }
     table filter {
         chain DOCKER {
-            @for proto, ports in bindings.iteritems():
+            @for proto, ports in bindings.items():
             daddr @ip_address/32 interface ! @interface outerface @interface protocol @proto {
-            @for port, binds in ports.iteritems():
+            @for port, binds in ports.items():
                 dport @port ACCEPT;
             @end
             }
